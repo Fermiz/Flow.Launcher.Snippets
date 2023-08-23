@@ -33,9 +33,10 @@ jobs:
           zip -r Flow.Launcher.Plugin.Snippets.zip . -x '*.git*'
       - name: Create Git tag
         run: |
-          version=${{steps.version.outputs.prop}}
-          git tag -a "v$version" -m "Release: v$version"
-          git push origin "v$version"
+          git tag -a "v${VERSION}" -m "Release: v${VERSION}"
+          git push origin "v${VERSION}"
+        env:
+          VERSION: ${{steps.version.outputs.prop}}
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
