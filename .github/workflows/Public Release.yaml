@@ -31,17 +31,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./requirements.txt -t ./lib
           zip -r Flow.Launcher.Plugin.Snippets.zip . -x '*.git*'
-      - name: Create Git tag
-        run: |
-          git tag -a "v${VERSION}" -m "Release: v${VERSION}"
-          git push origin "v${VERSION}"
-        env:
-          VERSION: ${{steps.version.outputs.prop}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: 'Flow.Launcher.Plugin.Snippets.zip'
-          tag_name: "v${{steps.version.outputs.prop}}"
+          tag_name: "v${{steps.tag_version.outputs.prop}}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
