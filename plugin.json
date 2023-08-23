@@ -1,0 +1,12 @@
+{
+    "ID":"51dd36d2-9824-4977-8e15-294dfbd7961e",
+    "ActionKeyword":"sp",
+    "Name":"Snippets",
+    "Description":"Simple plugin to save key/value snippets and copy to clipboard",
+    "Author":"Fermi Shuangqi Li",
+    "Version":"1.0.0",
+    "Language":"python",
+    "Website":"https://github.com/Fermiz",
+    "IcoPath":"assets\\snippets.png",
+    "ExecuteFileName":"main.py"
+}
