@@ -32,14 +32,14 @@ jobs:
           pip install -r ./requirements.txt -t ./lib
           zip -r Flow.Launcher.Plugin.Snippets.zip . -x '*.git*'
       - name: Add Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
+        uses: Klemensas/action-autotag@stable
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          version: "${{ steps.version.outputs.prop }}"
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: 'Flow.Launcher.Plugin.Snippets.zip'
-          tag_name: "v${{steps.tag_version.outputs.prop}}"
+          tag_name: "v${{steps.version.outputs.prop}}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
