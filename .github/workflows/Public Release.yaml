@@ -33,7 +33,7 @@ jobs:
           zip -r Flow.Launcher.Plugin.Snippets.zip . -x '*.git*'
       - name: Create Git tag
         run: |
-          version=${{steps.version.outputs.prop}
+          version=${{steps.version.outputs.prop}}
           git tag -a "v$version" -m "Release: v$version"
           git push origin "v$version"
       - name: Publish
