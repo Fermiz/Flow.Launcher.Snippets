@@ -37,6 +37,7 @@ jobs:
           git push origin "v${VERSION}"
         env:
           VERSION: ${{steps.version.outputs.prop}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
