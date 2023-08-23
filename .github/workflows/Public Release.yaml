@@ -31,6 +31,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./requirements.txt -t ./lib
           zip -r Flow.Launcher.Plugin.Snippets.zip . -x '*.git*'
+      - name: Add tag
+        id: tag
+        run: |
+          TAG = v${{steps.version.outputs.prop}}
+          echo "$TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          git tag -a $TAG -m "Published version $TAG" ${GITHUB_SHA}
+          git push origin $TAG
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
