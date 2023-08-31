@@ -4,7 +4,7 @@
     "Name":"Snippets",
     "Description":"Simple plugin to save key/value snippets and copy to clipboard",
     "Author":"Fermi Shuangqi Li",
-    "Version":"1.0.0",
+    "Version":"1.0.1",
     "Language":"python",
     "Website":"https://github.com/Fermiz/Flow.Launcher.Snippets",
     "IcoPath":"assets\\snippets.png",
