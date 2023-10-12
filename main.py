@@ -10,19 +10,27 @@ import sys
 import sqlite3
 
 # add plugin to local PATH
-parent_folder_path = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(parent_folder_path)
-sys.path.append(os.path.join(parent_folder_path, 'lib'))
-sys.path.append(os.path.join(parent_folder_path, 'plugin'))
+parentFolderPath = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(parentFolderPath)
+sys.path.append(os.path.join(parentFolderPath, 'lib'))
+sys.path.append(os.path.join(parentFolderPath, 'plugin'))
 
 from plugin.snippets import Snippets
 
-db_name = "./snippets.db"
-
 if __name__ == "__main__":
-    conn = sqlite3.connect(db_name)
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS snippets (key TEXT PRIMARY KEY, value TEXT)''')
-    conn.commit()
-    conn.close()
-    Snippets()
+    pluginPath = os.path.abspath(os.path.dirname(parentFolderPath))
+    mainPath = os.path.abspath(os.path.dirname(pluginPath))
+    snippetSettingsPath = mainPath + "/Settings/Plugins/Flow.Launcher.Snippets"
+    
+    dbName = snippetSettingsPath + "/snippets.db"
+
+    if not (os.path.exists(snippetSettingsPath)):
+        os.makedirs(snippetSettingsPath)
+        dbName = snippetSettingsPath + "/snippets.db"
+        conn = sqlite3.connect(dbName)
+        cursor = conn.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS snippets (key TEXT PRIMARY KEY, value TEXT)''')
+        conn.commit()
+        conn.close()
+    
+    Snippets(dbName=dbName)
