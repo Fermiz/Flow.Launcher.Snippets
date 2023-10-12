@@ -73,7 +73,7 @@ class Snippets(FlowLauncher):
                             "JsonRPCAction": {"method": "copy", "parameters": [value], }})
                     else:
                         clipboardValue = pyperclip.paste()
-                        displayValue = clipboardValue[:16] + "..." if len(clipboardValue) > 16 else ""
+                        displayValue = (clipboardValue[:16] + "...") if len(clipboardValue) > 16 else clipboardValue
                         if len(clipboardValue) != 0:
                             results.append({
                                 "Title": "Save from clipboard",
